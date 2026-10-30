@@ -1,20 +1,20 @@
-name: Sağlık Analizi
+name: saglik-analizi
 
 on:
-  workflow_dispatch: # Elle çalıştırma butonu çıkar
+  workflow_dispatch:
 
 jobs:
   run-python:
     runs-on: ubuntu-latest
     steps:
-      - name: Repo'yu al
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Python kurulu mu kontrol et
+      - name: Check Python version
         run: python3 --version
 
-      - name: Python çalıştır
+      - name: Run health analysis
         run: python3 health_analysis.py
 
-      - name: Sonuç dosyasını göster
+      - name: Show results file
         run: cat health_results.txt
