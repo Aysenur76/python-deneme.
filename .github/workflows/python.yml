@@ -1,29 +1,20 @@
-students = [
-    {"name": "Ali", "grade": 85},
-    {"name": "Ayşe", "grade": 92},
-    {"name": "Mehmet", "grade": 74},
-    {"name": "Zeynep", "grade": 88}
-]
+name: Sağlık Analizi
 
-total = sum(s["grade"] for s in students)
-average = total / len(students)
+on:
+  workflow_dispatch: # Elle çalıştırma butonu çıkar
 
-highest = max(students, key=lambda s: s["grade"])
-lowest = min(students, key=lambda s: s["grade"])
+jobs:
+  run-python:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repo'yu al
+        uses: actions/checkout@v3
 
-print("📊 Öğrenci Notları")
-for s in students:
-    print(f"{s['name']}: {s['grade']}")
+      - name: Python kurulu mu kontrol et
+        run: python3 --version
 
-print(f"\nOrtalama: {average:.2f}")
-print(f"En yüksek not: {highest['name']} ({highest['grade']})")
-print(f"En düşük not: {lowest['name']} ({lowest['grade']})")
+      - name: Python çalıştır
+        run: python3 health_analysis.py
 
-with open("results.txt", "w", encoding="utf-8") as f:
-    f.write("📊 Öğrenci Notları\n")
-    for s in students:
-        f.write(f"{s['name']}: {s['grade']}\n")
-    f.write(f"\nOrtalama: {average:.2f}\n")
-    f.write(f"En yüksek not: {highest['name']} ({highest['grade']})\n")
-    f.write(f"En düşük not: {lowest['name']} ({lowest['grade']})\n")
-
+      - name: Sonuç dosyasını göster
+        run: cat health_results.txt
