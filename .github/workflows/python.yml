@@ -1,0 +1,29 @@
+students = [
+    {"name": "Ali", "grade": 85},
+    {"name": "Ayşe", "grade": 92},
+    {"name": "Mehmet", "grade": 74},
+    {"name": "Zeynep", "grade": 88}
+]
+
+total = sum(s["grade"] for s in students)
+average = total / len(students)
+
+highest = max(students, key=lambda s: s["grade"])
+lowest = min(students, key=lambda s: s["grade"])
+
+print("📊 Öğrenci Notları")
+for s in students:
+    print(f"{s['name']}: {s['grade']}")
+
+print(f"\nOrtalama: {average:.2f}")
+print(f"En yüksek not: {highest['name']} ({highest['grade']})")
+print(f"En düşük not: {lowest['name']} ({lowest['grade']})")
+
+with open("results.txt", "w", encoding="utf-8") as f:
+    f.write("📊 Öğrenci Notları\n")
+    for s in students:
+        f.write(f"{s['name']}: {s['grade']}\n")
+    f.write(f"\nOrtalama: {average:.2f}\n")
+    f.write(f"En yüksek not: {highest['name']} ({highest['grade']})\n")
+    f.write(f"En düşük not: {lowest['name']} ({lowest['grade']})\n")
+
